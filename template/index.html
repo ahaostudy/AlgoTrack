@@ -43,7 +43,6 @@
 </div>
 </body>
 <script>
-    BASE_URL = 'http://127.0.0.1:5000'
     let data
 
     function getHTML(title, users) {
@@ -51,7 +50,7 @@
         for (let i = 0; i < users.length; i ++ ) {
             let user = users[i];
             html += `<div class="row">
-                <div><img src="` + BASE_URL + user.avatar_url + `" alt="` + user.name + `"></div>
+                <div><img src="` + user.avatar_url + `" alt="` + user.name + `"></div>
                 <div>` + user.name + `</div>
             </div>`
         }
@@ -59,7 +58,7 @@
     }
 
     $.ajax({
-        url: BASE_URL + '/comment',
+        url: '/comment',
         type: 'GET',
         success: res => {
             data = res.data

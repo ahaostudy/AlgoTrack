@@ -12,4 +12,4 @@ class Comment(Resource):
 
 class Image(Resource):
     def get(self, img):
-        return send_file(f'image\\{img}', mimetype='image/jpeg')
+        return send_file(f'image/{img}', mimetype='image/jpeg')
