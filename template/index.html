@@ -32,9 +32,15 @@
         }
 
         .card h2 {
-            font-size: 24px;
             font-weight: bold;
             margin: 15px 0;
+        }
+
+        .card h2 a {
+            font-size: 24px;
+            text-decoration: none;
+            outline: none;
+            color: #000;
         }
 
         .users {
@@ -70,8 +76,11 @@
             }
 
             .card h2 {
-                font-size: 38px;
                 margin-bottom: 30px;
+            }
+
+            .card h2 a {
+                font-size: 38px;
             }
 
             .users {
@@ -84,8 +93,11 @@
                 margin-right: 15px;
             }
 
-            .users span {
+            .users a {
                 font-size: 34px;
+                text-decoration: none;
+                outline: none;
+                color: #000;
                 margin-right: 20px;
             }
         }
@@ -103,11 +115,12 @@
 </div>
 </body>
 <script>
-    function getHTML(title, users) {
-        let html = '<div class="card"><h2>' + title + '</h2><div class="users">'
-        for (let i = 0; i < users.length; i++) {
-            let user = users[i];
-            html += '<img src="' + user.avatar_url + '" alt="' + user.name + '"><span>' + user.name + '</span>'
+    function getHTML(book) {
+        console.log(book)
+        let html = '<div class="card"><h2><a href="https://www.yuque.com/ahaostudy/algorithm/' + book.slug + '" target="_blank">' + book.title + '</a></h2><div class="users">'
+        for (let i = 0; i < book.comments.length; i++) {
+            let user = book.comments[i];
+            html += '<img src="' + user.avatar_url + '" alt="' + user.name + '"><a href="https://www.yuque.com/' + user.login + '" target="_blank">' + user.name + '</a>'
         }
         return html + '</div></div>'
     }
@@ -118,8 +131,7 @@
         success: res => {
             let data = res.data
             for (let i = 0; i < res.data.length; i++) {
-                let comment = res.data[i];
-                $('#container').append(getHTML(comment.title, comment.comments))
+                $('#container').append(getHTML(res.data[i]))
             }
         }
     })

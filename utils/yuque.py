@@ -10,7 +10,7 @@ def get_books(book_id: int, pattern: str, sort: bool) -> list:
     books = []
     for i in data:
         if not pattern or re.match(pattern, i.get('title')):
-            books.append({'id': i.get('id'), 'title': i.get('title')})
+            books.append({'id': i.get('id'), 'title': i.get('title'), 'slug': i.get('slug')})
     if sort: books.sort(key=lambda x: x.get('title'))
     return books
 
@@ -21,8 +21,8 @@ def get_comments() -> list:
     books = get_books(config.BOOK_ID, config.PATTERN, True)
     for b in books:
         comment = dict()
-        title = b.get('title').encode().decode()
-        comment['title'] = title
+        comment['title'] = b.get('title')
+        comment['slug'] = b.get('slug')
         comment['comments'] = list()
         res = requests.get(url(id))
         bc = res.json().get('data').get('comments')
