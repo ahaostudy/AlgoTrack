@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <title>算法系列打卡统计</title>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -60,33 +59,6 @@
         @media screen and (max-width: 1200px) {
             .container {
                 max-width: 760px;
-                padding: 30px;
-            }
-
-            .card {
-                margin: 36px;
-                padding: 32px 40px;
-                border-radius: 18px;
-            }
-
-            .card h2 {
-                font-size: 38px;
-                margin-bottom: 30px;
-            }
-
-            .users {
-                margin-bottom: 20px;
-            }
-
-            .users img {
-                width: 42px;
-                height: 42px;
-                margin-right: 15px;
-            }
-
-            .users span {
-                font-size: 34px;
-                margin-right: 20px;
             }
         }
 
@@ -99,29 +71,34 @@
     </style>
 </head>
 <body>
-<div class="container" id="container">
+<div class="container">
+    <div class="card">
+        <h2>Week0. C++语法基础</h2>
+        <div class="users">
+            <img src="/image/5ced477b-1ff9-4bb6-9109-40ff1df23522.png" alt="@ahao快去学习">
+            <span>@ahao快去学习</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Week1. 二分与双指针</h2>
+        <div class="users">
+            <img src="/image/6b894967-e82c-4eeb-acfc-bef8ce1bc039.png" alt="答案说明所有">
+            <span>答案说明所有</span>
+            <img src="/image/5ced477b-1ff9-4bb6-9109-40ff1df23522.png" alt="@ahao快去学习">
+            <span>@ahao快去学习</span>
+            <img src="/image/1668159532200-873136ac-7b2d-4206-84ca-7c1e624ab5cb.jpeg" alt="扬帆">
+            <span>扬帆</span>
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Week2. Trie字典树与并查集</h2>
+        <div class="users">
+            <img src="/image/6b894967-e82c-4eeb-acfc-bef8ce1bc039.png" alt="答案说明所有">
+            <span>答案说明所有</span>
+        </div>
+    </div>
 </div>
 </body>
-<script>
-    function getHTML(title, users) {
-        let html = '<div class="card"><h2>' + title + '</h2><div class="users">'
-        for (let i = 0; i < users.length; i++) {
-            let user = users[i];
-            html += '<img src="' + user.avatar_url + '" alt="' + user.name + '"><span>' + user.name + '</span>'
-        }
-        return html + '</div></div>'
-    }
-
-    $.ajax({
-        url: '/comment',
-        type: 'GET',
-        success: res => {
-            let data = res.data
-            for (let i = 0; i < res.data.length; i++) {
-                let comment = res.data[i];
-                $('#container').append(getHTML(comment.title, comment.comments))
-            }
-        }
-    })
-</script>
 </html>
