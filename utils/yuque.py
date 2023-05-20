@@ -15,6 +15,18 @@ def get_books(book_id: int, pattern: str, sort: bool) -> list:
     return books
 
 
+# 按用户ID去重
+def unique(comments: dict):
+    if len(comments) == 0: return []
+    ans = [comments[0]]
+    j = 0
+    for i in range(1, len(comments)):
+        if comments[i].get('id') != comments[j].get('id'):
+            j += 1
+            ans.append(comments[i])
+    return ans
+
+
 def get_comments() -> list:
     comments = list()
     url = lambda id: f"https://www.yuque.com/api/comments/floor?commentable_id={b.get('id')}&commentable_type=Doc"
@@ -30,5 +42,8 @@ def get_comments() -> list:
             user = c.get('user').copy()
             user['avatar_url'] = load(user.get('avatar_url'))
             comment['comments'].append(user)
+        # 排序去重
+        comment['comments'].sort(key=lambda x: x.get('id'))
+        comment['comments'] = unique(comment['comments'])
         comments.append(comment)
     return comments
