@@ -43,7 +43,7 @@ def get_comments() -> list:
             user['avatar_url'] = load(user.get('avatar_url'))
             comment['comments'].append(user)
         # 排序去重
-#         comment['comments'].sort(key=lambda x: x.get('id'))
-#         comment['comments'] = unique(comment['comments'])
+        comment['comments'].sort(key=lambda x: x.get('id'))
+        comment['comments'] = unique(comment['comments'])
         comments.append(comment)
     return comments
